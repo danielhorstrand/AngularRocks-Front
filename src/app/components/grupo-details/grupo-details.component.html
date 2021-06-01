@@ -1,0 +1,72 @@
+<div style="width: 400px; margin: auto;">
+  <div *ngIf="currentGrupo" class="edit-form">
+    <h4>Grupo</h4>
+    <form>
+      <div class="form-group">
+        <label for="name">Nombre</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          [(ngModel)]="currentGrupo.name"
+          name="name"
+        />
+      </div>
+      <div class="form-group">
+        <label for="descripcion">Descripcion</label>
+        <textarea class="form-control"
+        id="descripcion"
+        required
+        [(ngModel)]="currentGrupo.descripcion"
+        name="descripcion" rows="8" cols="80"
+        placeholder="Introduce una descripción..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="video">Video Link</label>
+        <input
+          class="form-control"
+          id="video"
+          required
+          [(ngModel)]="grupo.video"
+          name="video"
+          placeholder="Https://www.youtube.com ...."
+        />
+      </div>
+
+    </form>
+    <br>
+    <button
+      class="badge badge-primary mr-2"
+      *ngIf="currentGrupo.published"
+      (click)="updatePublished(false)"
+    >
+      UnPublish
+    </button>
+    <button
+      *ngIf="!currentGrupo.published"
+      class="btn btn-primary"
+      (click)="updatePublished(true)"
+    >
+      Publish
+    </button>
+
+    <button class="btn btn-danger" (click)="deleteGrupo()">
+      Delete
+    </button>
+
+    <button
+      type="submit"
+      class="btn btn-success"
+      (click)="updateGrupo()"
+    >
+      Update
+    </button>
+    <p>{{ message }}</p>
+  </div>
+
+  <div *ngIf="!currentGrupo">
+    <br />
+    <p>No tienes acceso a este grupo...</p>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="list row">
+  <div class="col-md-8 col-lg-8 col-xl-8">
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by name"
+        [(ngModel)]="name"
+      />
+      <div class="input-group-append">
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          (click)="searchName()"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-6 col-xl-6">
+    <h4 class="card-header bg-dark text-white">Lista Grupos</h4>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let grupo of grupos; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setActiveGrupo(grupo, i)"
+      >
+        {{ grupo.name }}
+      </li>
+    </ul>
+
+    <button class="m-3 btn btn-sm btn-danger" (click)="removeAllGrupos()">
+      Borrar Todos
+    </button>
+  </div>
+  <div class="col-md-6 col-lg-6 col-xl-6">
+    <div *ngIf="currentGrupo">
+      <h4 class="card-header bg-dark text-white">Grupo</h4>
+      <div>
+        <p class="h1">{{ currentGrupo.name }}</p>
+      </div>
+      <div>
+        {{ currentGrupo.descripcion }}
+      </div>
+      <br>
+      <div class="col-12">
+        <iframe width="100%" height="315" [src]="getVideoIframe(currentGrupo.video)" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+
+      <a class="btn btn-success" routerLink="/grupos/{{ currentGrupo.id }}">
+        Edit
+      </a>
+    </div>
+
+    <div *ngIf="!currentGrupo">
+      <br />
+      <p class="text-cursive text-danger">**Selecciona un grupo para ver mas informacion**</p>
+    </div>
+  </div>
+</div>
